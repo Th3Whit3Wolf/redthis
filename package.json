@@ -1,0 +1,43 @@
+{
+  "name": "redthis",
+  "scripts": {
+    "dev": "solid-start dev",
+    "build": "solid-start build",
+    "start": "solid-start start",
+    "format": "rome ci format src",
+    "format:fix": "rome format --write src",
+    "lint": "rome ci lint src",
+    "lint:fix": "rome lint --apply src"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@iconify/json": "^2.2.61",
+    "@types/node": "^18.11.18",
+    "autoprefixer": "^10.4.14",
+    "esbuild": "^0.17.18",
+    "postcss": "^8.4.23",
+    "rome": "^12.0.0",
+    "solid-start-node": "^0.2.26",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4",
+    "unplugin-icons": "^0.16.1",
+    "vite": "^4.3.5"
+  },
+  "dependencies": {
+    "@kobalte/core": "^0.9.5",
+    "@kobalte/tailwindcss": "^0.6.5",
+    "@prpc/solid": "^0.2.33",
+    "@prpc/vite": "^0.3.21",
+    "@solidjs/meta": "^0.28.4",
+    "@solidjs/router": "^0.8.2",
+    "@tanstack/solid-query": "5.0.0-alpha.28",
+    "solid-js": "^1.7.4",
+    "solid-start": "^0.2.26",
+    "solid-toast": "^0.5.0",
+    "undici": "^5.22.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=7"
+  }
+}

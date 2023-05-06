@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.collapsible__trigger-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 250ms;
+}
+
+.collapsible__trigger[data-expanded] .collapsible__trigger-icon {
+  transform: rotateZ(180deg);
+}
+
+.collapsible__content {
+  overflow: hidden;
+  animation: slideUp 300ms ease-out;
+}
+
+.collapsible__content[data-expanded] {
+  animation: slideDown 300ms ease-out;
+}
+
+.collapsible__content {
+  width: 100%;
+  overflow: hidden;
+  border-top: none;
+  border: none;
+  color: hsl(240 4% 16%);
+  animation: slideUp 300ms ease-out;
+}
+
+.collapsible__content[data-expanded] {
+  animation: slideDown 300ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--kb-collapsible-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--kb-collapsible-content-height);
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+.collapsible-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 250ms;
+}
+
+.collapsible-icon-open {
+  transform: rotateZ(180deg);
+}
