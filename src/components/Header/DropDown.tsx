@@ -1,13 +1,4 @@
-import { Collapsible, DropdownMenu } from "@kobalte/core";
-import AvatarIcon from "~icons/clarity/avatar-line";
-import InfoIcon from "~icons/material-symbols/info-outline";
-import ChevronDownIcon from "~icons/carbon/chevron-down";
-import RulesIcon from "~icons/carbon/rule";
-import HornIcon from "~icons/mdi/bullhorn-variant-outline";
-import LogInIcon from "~icons/ic/round-log-in";
-import HelpIcon from "~icons/material-symbols/help-outline-rounded";
-import { For, JSXElement } from "solid-js";
-import { MoreMenuItems, TPMenuItems } from "~/data/menuItems";
+import { JSXElement, createEffect, createSignal, onCleanup } from "solid-js";
 
 type CollapsibleItemProps = {
 	href: string;
@@ -20,75 +11,175 @@ type SubDropDownMenuProps = {
 	items: Array<CollapsibleItemProps>;
 };
 
-const SubDropDownMenu = (props: SubDropDownMenuProps) => {
-	return (
-		<Collapsible.Root class="collapsible">
-			<Collapsible.Trigger class="w-full collapsible__trigger ">
-				<div class="flex my-auto px-2 py-1 px-2 py-1 hover:bg-[#0079d3] hover:text-white">
-					<div class="flex flex-row gap-2 grow">
-						{props.icon}
-						{props.name}
-					</div>
+function Dropdown() {
+	const [isOpen, setIsOpen] = createSignal(false);
+	const [submenuMore, setSubmenuMore] = createSignal(false);
+	const [submenuTP, setSubmenuTP] = createSignal(false);
 
-					<ChevronDownIcon class="flex justify-end collapsible__trigger-icon" />
+	function toggleDropdown() {
+		if (!isOpen()) {
+			setSubmenuMore(false);
+			setSubmenuTP(false);
+		}
+		setIsOpen(!isOpen());
+	}
+
+	function toggleDropdownMore() {
+		setSubmenuMore(!submenuMore());
+	}
+
+	function toggleDropdownTP() {
+		setSubmenuTP(!submenuTP());
+	}
+
+	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+	function handleClickOutside(event: any) {
+		if (!event.target.closest(".dropdown")) {
+			setIsOpen(false);
+		}
+	}
+
+	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+	function handleKeyDown(event: any) {
+		if (event.key === "Escape") {
+			setIsOpen(false);
+		}
+	}
+
+	createEffect(() => {
+		if (isOpen()) {
+			document.addEventListener("click", handleClickOutside);
+			document.addEventListener("keydown", handleKeyDown);
+		} else {
+			document.removeEventListener("click", handleClickOutside);
+			document.removeEventListener("keydown", handleKeyDown);
+		}
+	});
+
+	onCleanup(() => {
+		document.removeEventListener("click", handleClickOutside);
+		document.removeEventListener("keydown", handleKeyDown);
+	});
+
+	return (
+		<div class="dropdown relative my-2 h-10">
+			<button
+				type="button"
+				onClick={toggleDropdown}
+				class="px-2 py-1 text-sm font-medium text-gray-700 bg-white border rounded-md border-white hover:border-gray-300 focus:outline-none"
+			>
+				<div class="flex  h-7 w-12">
+					<div class="avatar bg-white font-light text-xl text-[#878A8C] mt-1 h-7 w-7" />
+					<div class="downChevron bg-white text-lg text-[#878A8C] mt-1 h-5 w-5" />
 				</div>
-			</Collapsible.Trigger>
-			<Collapsible.Content class="block collapsible__content w-52">
-				<For each={props.items}>
-					{(item) => (
-						<a
-							href={item.href}
-							class="h-12 w-52 text-sm/4 text-[#1c1c1c] font-medium block flex-row items-center align-baseline pr-4 pl-12 py-[0.625rem] relative hover:bg-gray-100"
-						>
-							<span class="align-baseline">{item.title}</span>
-						</a>
-					)}
-				</For>
-			</Collapsible.Content>
-		</Collapsible.Root>
-	);
-};
+			</button>
+			{isOpen() && (
+				<div class="absolute right-0 w-48 bg-white rounded-md shadow-lg">
+					<ul>
+						<li class="rounded-t-mdhover:bg-[#0079d3] hover:text-white w-full">
+							<div class="rounded-t-md text-sm font-medium flex flex-row gap-2 my-auto px-2 py-2 hover:bg-[#0079d3] hover:text-white w-full">
+								<div class="help" />
+								Help Center
+							</div>
+						</li>
+						<li class="hover:bg-[#0079d3] hover:text-white w-full">
+							<button
+								type="button"
+								onClick={toggleDropdownMore}
+								class="w-full py-1 bg-white text-sm font-medium focus:outline-none hover:bg-[#0079d3] hover:text-white"
+							>
+								<div class="flex justify-between h-7 w-full ">
+									<div class="flex flex-row gap-2 my-auto px-2 py-1">
+										<div class="info" />
+										More
+									</div>
+									<div class="downChevron bg-white text-lg text-[#878A8C] mt-1 h-5 w-5 mr-2" />
+								</div>
+							</button>
+						</li>
 
-export default function UserDropdownMenu() {
-	return (
-		<DropdownMenu.Root>
-			<DropdownMenu.Trigger class="flex flex-row my-auto text-[#1c1c1c] rounded-lg border-gray-300 hover:border py-1 px-3 ml-2 collapsible__trigger">
-				<AvatarIcon class="bg-white text-lg text-[#878A8C] h-5 w-5" />
+						{submenuMore() && (
+							<>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Reddit iOS</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Reddit Android</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Rereddit</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Best Communities</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Communities</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">About Reddit</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Blog</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Careers</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1">Press</div>
+								</li>
+							</>
+						)}
 
-				<DropdownMenu.Icon>
-					<ChevronDownIcon class="bg-white text-lg text-[#878A8C] h-5 w-5 collapsible__trigger-icon" />
-				</DropdownMenu.Icon>
-			</DropdownMenu.Trigger>
+						<li class="hover:bg-[#0079d3] hover:text-white w-full">
+							<button
+								type="button"
+								onClick={toggleDropdownTP}
+								class="w-full py-1 bg-white text-sm font-medium focus:outline-none hover:bg-[#0079d3] hover:text-white"
+							>
+								<div class="flex justify-between h-7 w-full">
+									<div class="flex flex-row gap-2 my-auto pl-2">
+										<div class="rules" />
+										Terms & Policies
+									</div>
+									<div class="downChevron bg-white text-lg text-[#878A8C] mt-1 h-5 w-5 mr-2" />
+								</div>
+							</button>
+						</li>
 
-			<DropdownMenu.Portal>
-				<DropdownMenu.Content class="bg-white border-0 rounded-lg outline-transparent mt-5 text-[#1c1c1c] collapsible__content">
-					<DropdownMenu.Item class="border-0 flex flex-row outline-transparent ">
-						<div class="flex flex-row gap-2 my-auto px-2 py-1 hover:bg-[#0079d3] hover:text-white w-full hover:rounded-t-lg">
-							<HelpIcon />
-							Help Center
-						</div>
-					</DropdownMenu.Item>
+						{submenuTP() && (
+							<>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1"> User Agreement</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1"> Privacy Policy</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1"> Content Policy</div>
+								</li>
+								<li class="hover:bg-[#0079d3] hover:text-white w-full">
+									<div class="text-sm font-medium ml-6 my-auto px-2 py-1"> Moderator Code of Conduct</div>
+								</li>
+							</>
+						)}
 
-					<SubDropDownMenu icon={<InfoIcon />} name="More" items={MoreMenuItems} />
-					<SubDropDownMenu icon={<RulesIcon />} name="Terms & Policies" items={TPMenuItems} />
-
-					<DropdownMenu.Item class="border-0 flex flex-row outline-transparent">
-						<div class="flex flex-row gap-2 my-auto px-2 py-1 px-2 py-1 hover:bg-[#0079d3] hover:text-white w-full">
-							<HornIcon />
-							Advertise on Reddit
-						</div>
-					</DropdownMenu.Item>
-
-					<DropdownMenu.Separator class="dropdown-menu__separator" />
-
-					<DropdownMenu.Item class="border-0 flex flex-row outline-transparent">
-						<div class="flex flex-row gap-2 my-auto px-2 py-1 px-2 py-1 hover:bg-[#0079d3] hover:text-white hover:rounded-b-lg w-full">
-							<LogInIcon />
-							Login In / Sign Up
-						</div>
-					</DropdownMenu.Item>
-				</DropdownMenu.Content>
-			</DropdownMenu.Portal>
-		</DropdownMenu.Root>
+						<li class="hover:bg-[#0079d3] hover:text-white w-full">
+							<div class="text-sm font-medium flex flex-row gap-2 my-auto px-2 py-2">
+								<div class="horn" />
+								Advertise on Reddit
+							</div>
+						</li>
+						<li class="hover:bg-[#0079d3] hover:text-white w-full rounded-b-md">
+							<div class="text-sm font-medium flex flex-row gap-2 my-auto px-2 py-2">
+								<div class="logIn" />
+								Login In / Sign Up
+							</div>
+						</li>
+					</ul>
+				</div>
+			)}
+		</div>
 	);
 }
+
+export default Dropdown;
