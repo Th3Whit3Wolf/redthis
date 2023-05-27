@@ -1,10 +1,11 @@
+import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
-import UserDropdownMenu from "./DropDown";
 
 const Logo = () => {
 	return (
 		<a href="/" class="w-auto flex flex-row items-center">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-12 w-10 p-2 pl-0 ">
+			{/* rome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-12 w-10 p-2 pl-0">
 				<g>
 					<circle fill="#FF4500" cx="10" cy="10" r="10" />
 					<path
@@ -13,6 +14,7 @@ const Logo = () => {
 					/>
 				</g>
 			</svg>
+			{/* rome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 			<svg class="h-[1.125rem] mr-5 w-auto block" viewBox="0 0 57 18" xmlns="http://www.w3.org/2000/svg">
 				<g fill="#1c1c1c">
 					<path d="M54.63,16.52V7.68h1a1,1,0,0,0,1.09-1V6.65a1,1,0,0,0-.93-1.12H54.63V3.88a1.23,1.23,0,0,0-1.12-1.23,1.2,1.2,0,0,0-1.27,1.11V5.55h-1a1,1,0,0,0-1.09,1v.07a1,1,0,0,0,.93,1.12h1.13v8.81a1.19,1.19,0,0,0,1.19,1.19h0a1.19,1.19,0,0,0,1.25-1.12A.17.17,0,0,0,54.63,16.52Z" />
@@ -30,7 +32,10 @@ const Logo = () => {
 
 const GetAppButton = () => {
 	return (
-		<button class="bg-[#F6F7F8] text-[#0f1a1c] text-sm text-center font-semibold rounded-full ml-4 min-h-[2rem] min-w-[2rem]  w-[7.5rem]  align-baseline justify-center items-center flex">
+		<button
+			type="button"
+			class="bg-[#F6F7F8] text-[#0f1a1c] text-sm text-center font-semibold rounded-full ml-4 min-h-[2rem] min-w-[2rem]  w-[7.5rem]  align-baseline justify-center items-center flex"
+		>
 			Get App
 		</button>
 	);
@@ -38,7 +43,10 @@ const GetAppButton = () => {
 
 const LogInButton = () => {
 	return (
-		<button class="bg-[#ff4500] text-white text-sm text-center font-semibold rounded-full ml-4 min-h-[2rem] min-w-[2rem]  w-[7.5rem]  align-baseline justify-center items-center flex">
+		<button
+			type="button"
+			class="bg-[#ff4500] text-white text-sm text-center font-semibold rounded-full ml-4 min-h-[2rem] min-w-[2rem]  w-[7.5rem]  align-baseline justify-center items-center flex"
+		>
 			Log In
 		</button>
 	);
@@ -52,10 +60,10 @@ export default function Header() {
 					<Logo />
 					<SearchBar />
 				</div>
-				<div class="flex items-center space-x-4">
+				<div class="flex items-center space-x-4 h-12">
 					<GetAppButton />
 					<LogInButton />
-					<UserDropdownMenu />
+					<DropDown />
 				</div>
 			</div>
 		</header>
