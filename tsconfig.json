@@ -2,7 +2,12 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext", "scripthost"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "scripthost"
+    ],
     "newLine": "LF",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -18,14 +23,15 @@
     "strict": true,
     "sourceMap": true,
     "types": [
-      "solid-js", 
+      "solid-js",
       "vite/client",
-      "node", 
-      "unplugin-icons/types/solid"
+      "node",
     ],
     "baseUrl": "./",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": [
+        "./src/*"
+      ]
     }
   }
 }

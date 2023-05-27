@@ -1,0 +1,27 @@
+[layout]
+sports = { collection = "ph", icon = "baseball-light" }
+gaming = { collection = "ph", icon = "game-controller" }
+business = { collection = "ph", icon = "chart-line-up-light" }
+crypto = { collection = "icon-park-outline", icon = "blockchain" }
+tv = { collection = "ph", icon = "television" }
+star = { collection = "ph", icon = "star-light" }
+dots = { collection = "mdi", icon = "dots-horizontal-circle-outline" }
+home = { collection = "ph", icon = "house" }
+Popular = { collection = "ph", icon = "arrow-circle-up-right" }
+downChevron = { collection = "carbon", icon = "chevron-down" }
+rules = { collection = "carbon", icon = "rule" }
+avatar = { collection = "clarity", icon = "avatar-line" }
+logIn = { collection = "ic", icon = "round-log-in" }
+help = { collection = "material-symbols", icon = "help-outline-rounded" }
+info = { collection = "material-symbols", icon = "info-outline" }
+horn = { collection = "mdi", icon = "bullhorn-variant-outline" }
+
+search = { collection = "material-symbols", icon = "search-rounded" }
+chatBubble = { collection = "ph", icon = "chat-bold" }
+share = { collection = "ph", icon = "share-fat-bold" }
+bookmark = { collection = "ph", icon = "bookmark-simple-bold" }
+ellipsisHorizontal = { collection = "mdi", icon = "ellipsis-horizontal" }
+upVote = { collection = "ph", icon = "arrow-fat-up-bold" }
+downVote = { collection = "ph", icon = "arrow-fat-down-bold" }
+upVoteSolid = { collection = "ph", icon = "arrow-fat-up-fill" }
+downVoteSolid = { collection = "ph", icon = "arrow-fat-down-fill" }
