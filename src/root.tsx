@@ -5,6 +5,7 @@ import { Body, ErrorBoundary, FileRoutes, Head, Html, Meta, Routes, Scripts, Tit
 import Header from "./components/Header";
 import SideMenu from "./components/SideMenu";
 import "./root.css";
+import "./styles/layout.css";
 
 export default function Root() {
 	return (
