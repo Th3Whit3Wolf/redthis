@@ -1,9 +1,5 @@
 import { createSignal, Show } from "solid-js";
 import fmtNum from "~/lib/utils/fmtNum";
-import ArrowDownIcon from "~icons/ph/arrow-fat-down-bold";
-import ArrowUpIcon from "~icons/ph/arrow-fat-up-bold";
-import SolidArrowDownIcon from "~icons/ph/arrow-fat-down-fill";
-import SolidArrowUpIcon from "~icons/ph/arrow-fat-up-fill";
 
 type PostVotesProps = {
 	score: number;
@@ -17,28 +13,35 @@ export default function PostVotes(props: PostVotesProps) {
 			<Show
 				when={voteDir() === 1}
 				fallback={
-					<ArrowUpIcon
+					<div
 						onClick={() => setVoteDir(1)}
-						class="h-6 w-6 hover:bg-gray-200  rounded-md hover:text-[#cc3700]"
+						onKeyDown={() => setVoteDir(1)}
+						class="upVote h-6 w-6 hover:bg-gray-200  rounded-md hover:text-[#cc3700]"
 					/>
 				}
 			>
-				<SolidArrowUpIcon onClick={() => setVoteDir(0)} class="h-6 w-6 hover:bg-gray-200 rounded-md text-[#FF4500]" />
+				<div
+					onClick={() => setVoteDir(0)}
+					onKeyDown={() => setVoteDir(0)}
+					class="upVoteSolid h-6 w-6 hover:bg-gray-200 rounded-md text-[#FF4500]"
+				/>
 			</Show>
 
 			<p class="text-xs font-bold text-black dark:text-gray-50 py-2">{fmtNum(props.score + voteDir())}</p>
 			<Show
 				when={voteDir() === -1}
 				fallback={
-					<ArrowDownIcon
+					<div
 						onClick={() => setVoteDir(-1)}
-						class="h-6 w-6 hover:bg-gray-200 rounded-md hover:text-[#5a75cc]"
+						onKeyDown={() => setVoteDir(-1)}
+						class="downVote h-6 w-6 hover:bg-gray-200 rounded-md hover:text-[#5a75cc]"
 					/>
 				}
 			>
-				<SolidArrowDownIcon
+				<div
 					onClick={() => setVoteDir(0)}
-					class="h-6 w-6 hover:bg-gray-200  rounded-md text-[#7193FF]"
+					onKeyDown={() => setVoteDir(0)}
+					class="downVoteSolid h-6 w-6 hover:bg-gray-200  rounded-md text-[#7193FF]"
 				/>
 			</Show>
 		</div>

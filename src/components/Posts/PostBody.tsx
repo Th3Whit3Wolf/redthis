@@ -11,7 +11,9 @@ export default function PostBody(props: PostBodyProps) {
 				{" "}
 				<h2 class="text-xl font-semibold text-[#222222] dark:text-gray-300">{props.title}</h2>
 			</a>
-			<h2 class="mt-2 text-sm font-light text-[#1c1c1c] dark:text-gray-300">{props.body}</h2>
+			<p class="mt-2 pb-1 text-sm font-normal leading-[21px] align-baseline break-words text-[#1c1c1c] dark:text-gray-300">
+				{props.body}
+			</p>
 		</div>
 	);
 }
