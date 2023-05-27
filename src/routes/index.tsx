@@ -1,9 +1,11 @@
 import PostsColumn from "~/components/Posts/PostsColumn";
+import SubredditHeader from "~/components/SubredditHeader";
 import { posts } from "~/data/posts";
 
 export default function Home() {
 	return (
 		<main class="w-screen">
+			<SubredditHeader color1="#33a8ff" color2="#ffffff" joinColor="#0079d3" path="r/node" title="node.js" />
 			<div class="h-screen bg-[#dae0e6] w-full px-6 py-5 my-0 mx-auto flex flex-row align-baseline justify-center">
 				<PostsColumn posts={posts} />
 				<div class="block ml-6 mt-7 basis-80 w-80">
